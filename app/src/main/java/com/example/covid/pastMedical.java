@@ -7,7 +7,6 @@ import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.widget.Button;
 
 import java.io.File;
@@ -15,10 +14,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class pastMedical extends AppCompatActivity {
+public class pastMedical extends AppCompatActivity {    //USER SIDE ACTIVITY
 
     List<Button> allMedical;
-
 
     @SuppressLint("ResourceAsColor")
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -26,14 +24,16 @@ public class pastMedical extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_past_medical);
+
         File dir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
         File[] allFiles = dir.listFiles();
-        File medicalHistory = new File(dir, "medicalHistory.txt");
-        readAndWrite rw = new readAndWrite(medicalHistory);
+        File medicalHistory = new File(dir, "medicalHistory.txt");  //txt file stored in DOCUMENTS on user's device
+        readAndWrite rw = new readAndWrite(medicalHistory); //create a readAndWrite object rw
 
         Boolean exist = rw.fileExists(allFiles, "medicalHistory.txt");
 
-        if (exist != true) {
+        if (exist != true) {    //we added what information would look like in the app since we do not have access to people government covid test data. This shows we can
+                                //readily display it in our app when given this government data
             rw.writeFile("PASSED - MCKNZIE HEALTH HOSP - 2/14/2021");
             rw.writeFile("FAILED - HUMBER RIVER HOSP - 1/11/2021");
             rw.writeFile("PASSED - WALMART CLINIC - 8/26/2020");
@@ -55,22 +55,22 @@ public class pastMedical extends AppCompatActivity {
 
         ArrayList<String> infoArray = null;
         try {
-            infoArray = rw.readFile();
+            infoArray = rw.readFile();  //read all the user's old test data from reading the medicalHistory file
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        for (int i = 0; i < Math.min(infoArray.size(), 10); i++) {
-            if (i <= 10) {
-                if (infoArray.get(i).charAt(0) == 'P') {
-                    allMedical.get(i).setBackgroundColor(0xFF77DF79);
-                }
-                else if (infoArray.get(i).charAt(0) == 'F'){
-                    allMedical.get(i).setBackgroundColor(0xFFC23B22);
-                }
-                allMedical.get(i).setText(infoArray.get(i));
-            }
-        }
+        for (int i = 0; i < Math.min(infoArray.size(), 10); i++) {  //only want to display recent 10
 
+            if (infoArray.get(i).charAt(0) == 'P') {    //since our info is in the syntax RESULT + LOCATION, if charAt(0) is 'P' then RESULT is PASSED
+                allMedical.get(i).setBackgroundColor(0xFF77DF79); //make background of button green
+            }
+            else if (infoArray.get(i).charAt(0) == 'F'){    //since our info is in the syntax RESULT + LOCATION, if charAt(0) is 'F' then RESULT is FAILED
+                allMedical.get(i).setBackgroundColor(0xFFC23B22);   //make background of button red
+            }
+
+            allMedical.get(i).setText(infoArray.get(i)); //set the button text to info
+        }
     }
+
 }
