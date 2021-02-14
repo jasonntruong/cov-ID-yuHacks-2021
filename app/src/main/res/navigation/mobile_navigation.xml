@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.cov_idserviceside.ui.home.HomeFragment"
+        android:name="com.example.covid.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.cov_idserviceside.ui.Activitylog.Activitylog"
+        android:name="com.example.covid.ui.Activitylog.Activitylog"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_Activitylog" />
+        tools:layout="@layout/fragment_activity_log" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.cov_idserviceside.ui.Requirements.Requirements"
+        android:name="com.example.covid.ui.Requirements.Requirements"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_requirements" />
 </navigation>

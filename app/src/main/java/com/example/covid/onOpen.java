@@ -173,8 +173,7 @@ public class onOpen extends AppCompatActivity {
             public void onClick(View v) {
                 String enteredEmail = String.valueOf(email.getText());
                 String enteredPassword = String.valueOf(password.getText());
-                Intent serviceSide = new Intent(getApplicationContext(), MainActivity.class); //REPLACE WITH SERVICE SIDE HOME
-                startActivity(serviceSide);
+
                 if (userInfo.containsKey(enteredEmail)){
                     if (userInfo.get(enteredEmail).equals(enteredPassword)){
                         Intent userSide = new Intent(getApplicationContext(), pastMedical.class);
@@ -184,7 +183,7 @@ public class onOpen extends AppCompatActivity {
                 }
                 else if (serviceInfo.containsKey(enteredEmail)) {
                     if (serviceInfo.get(enteredEmail).equals(enteredPassword)) {
-                        serviceSide = new Intent(getApplicationContext(), HomeFragment.class); //REPLACE WITH SERVICE SIDE HOME
+                        Intent serviceSide = new Intent(getApplicationContext(), MainActivity.class); //REPLACE WITH SERVICE SIDE HOME
                         startActivity(serviceSide);
                     }
 
