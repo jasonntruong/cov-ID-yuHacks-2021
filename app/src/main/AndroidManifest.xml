@@ -19,6 +19,7 @@
         <activity android:name=".pastScans" />
         <activity android:name=".MainActivity"/>
         <activity android:name=".nfc_reader"/>
+        <activity android:name=".userSide"/>
 
 
         <meta-data

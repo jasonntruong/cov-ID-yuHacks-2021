@@ -130,7 +130,7 @@ public class nfc_reader extends AppCompatActivity {
         pass_fail(testvalue, Integer.parseInt(String.valueOf(sb)));//puts the above obtained value into a function to test if it passes the test
 
         sb = new StringBuilder();//Reading for the Account Number
-        for(int count = 30 ; count > 60; count++){
+        for(int count = 30 ; count < 60; count++){
             if(Character.isDigit(chars[count])){
                 sb.append(chars[count]);
             }
