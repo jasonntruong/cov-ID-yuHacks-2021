@@ -10,23 +10,18 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.covid.ui.home.HomeFragment;
-
-import java.util.ArrayList;
 import java.util.Hashtable;
 
-public class onOpen extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
     Hashtable<String, String> userInfo;
     Hashtable<String, String> serviceInfo;
 
     TextView welcome, prompt;
     Button login, forgot;
-    ImageView covidlogo;
     EditText email, password;
 
     Animation fadein, uptodownPrompt, uptodownEmail, uptodownPassword, uptodownLogin, uptodownForgot;
@@ -39,12 +34,12 @@ public class onOpen extends AppCompatActivity {
         userInfo = new Hashtable<String, String>();
         serviceInfo = new Hashtable<String, String>();
 
-        userInfo.put("tb@user.com", "tarun");
+        userInfo.put("tb@user.com", "tarun");       //Hashtable stores username as key and password as value. userInfo stores our accounts for the User Side
         userInfo.put("rl@user.com", "ryan");
         userInfo.put("tr@user.com", "tharuveen");
         userInfo.put("jt@user.com", "jason");
 
-        serviceInfo.put("tb@service.com", "tarun");
+        serviceInfo.put("tb@service.com", "tarun"); //like userInfo - serviceInfo stores our accounts for the Service Side
         serviceInfo.put("rl@service.com", "ryan");
         serviceInfo.put("tr@service.com", "tharuveen");
         serviceInfo.put("jt@service.com", "jason");
@@ -56,7 +51,6 @@ public class onOpen extends AppCompatActivity {
         login = findViewById(R.id.login);
         forgot = findViewById(R.id.forgot);
 
-        email.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
         fadein = AnimationUtils.loadAnimation(this, R.anim.fadein);
         uptodownPrompt = AnimationUtils.loadAnimation(this, R.anim.uptodown);
         uptodownEmail = AnimationUtils.loadAnimation(this, R.anim.uptodown);
@@ -64,7 +58,7 @@ public class onOpen extends AppCompatActivity {
         uptodownLogin = AnimationUtils.loadAnimation(this, R.anim.uptodown);
         uptodownForgot = AnimationUtils.loadAnimation(this, R.anim.uptodown);
 
-
+        //A LOAD OF DOMINO EFFECT ANIMATIONS (ANIMATION STARTS WHEN PREVIOUS ANIMATION ENDS)
         welcome.startAnimation(fadein);
         fadein.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -168,31 +162,31 @@ public class onOpen extends AppCompatActivity {
             }
         });
 
-        login.setOnClickListener(new View.OnClickListener() {
+
+        login.setOnClickListener(new View.OnClickListener() {   //if login button is clicked...
             @Override
             public void onClick(View v) {
                 String enteredEmail = String.valueOf(email.getText());
                 String enteredPassword = String.valueOf(password.getText());
 
-                if (userInfo.containsKey(enteredEmail)){
-                    if (userInfo.get(enteredEmail).equals(enteredPassword)){
-                        Intent userSide = new Intent(getApplicationContext(), pastMedical.class);
-                        startActivity(userSide);
+                if (userInfo.containsKey(enteredEmail)){        //check if the user's entered email is in the Hashtable
+                    if (userInfo.get(enteredEmail).equals(enteredPassword)){    //if it is then check if its value (password) is the same as the user's entered password
+                        Intent userSide = new Intent(getApplicationContext(), userSide.class);
+                        startActivity(userSide);    //if it is then open the userSide Activity
                     }
 
                 }
-                else if (serviceInfo.containsKey(enteredEmail)) {
-                    if (serviceInfo.get(enteredEmail).equals(enteredPassword)) {
-                        Intent serviceSide = new Intent(getApplicationContext(), MainActivity.class); //REPLACE WITH SERVICE SIDE HOME
-                        startActivity(serviceSide);
+                else if (serviceInfo.containsKey(enteredEmail)) {   //check if the service's entered email is in the Hashtable
+                    if (serviceInfo.get(enteredEmail).equals(enteredPassword)) {    //if it is then check if its value (password) is the same as the service's entered password
+                        Intent serviceSide = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(serviceSide); //if it is then open the serviceSide Activity
                     }
 
                 }
 
-                else {
-                    Toast.makeText(getApplicationContext(), "Incorrect", Toast.LENGTH_SHORT).show();
+                else {  //else then email or password is incorrect so we send a notification message to the user/service
+                    Toast.makeText(getApplicationContext(), "Incorrect email/password!", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
 
