@@ -21,25 +21,16 @@ import java.util.ArrayList;
 public class readAndWrite {
 
     FileOutputStream outStream;
-    FileInputStream inStream;
     File mfile;
-    ArrayList<String> infoHistory;
 
-    File[] mDirectory;
-    String mFileName;
 
-    protected readAndWrite(File file){
+    public readAndWrite(File file){
         mfile = file;
     }
 
-    protected readAndWrite(File[] directory, String fileName) {
-        mDirectory = directory;
-        mFileName = fileName;
-    }
 
-    protected void writeFile(String message){   //write to file
+    public void writeFile(String message){   //write to file
         try {
-            Log.d("add", message);
             outStream = new FileOutputStream(mfile, true);
             outStream.write(message.getBytes());
             outStream.write("\n".getBytes());
@@ -51,7 +42,20 @@ public class readAndWrite {
         }
     }
 
-    protected Boolean fileExists(File[] directory, String fileName) {
+    public void clearFile() {   //clear a file
+        try {
+            outStream = new FileOutputStream(mfile, false);
+            outStream.write("".getBytes()); //write "" to a file (append is off so this clears all data in the file)
+            outStream.write("\n".getBytes());
+            outStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Boolean fileExists(File[] directory, String fileName) { //check if a file exists within a given directory
         for (File files : directory) {
             if (files.getName().equals(fileName)) {
                 return true;
@@ -63,18 +67,18 @@ public class readAndWrite {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    protected ArrayList<String> readFile() throws IOException {    //read from file and returns contents as String
+    protected ArrayList<String> readFile() throws IOException {    //read from file and returns contents as an ArrayList<String>
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(mfile), StandardCharsets.UTF_8));
         String line;
         ArrayList<String> infoArray = new ArrayList<String>();
 
-        while ((line = br.readLine()) != null) {
+        while ((line = br.readLine()) != null) {    //while the line in br is not null, then we add that line to the infoArray
             infoArray.add(line);
 
         }
 
         br.close();
 
-        return infoArray;
+        return infoArray;   //return the infoArray / ArrayList<String> with all the String data from the file
     }
 }
