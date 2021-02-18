@@ -53,6 +53,8 @@ public class nfc_reader extends AppCompatActivity {
     TextView nfc_reader;
     String testvalue;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,15 +124,16 @@ public class nfc_reader extends AppCompatActivity {
 
         char[] chars = text.toCharArray();//reads the file to get the date of when last tested
         StringBuilder sb = new StringBuilder();
-        for(int count = 0; count < 30; count++){
+        for(int count = 25; count < 50; count++){
             if(Character.isDigit(chars[count])){
                 sb.append(chars[count]);
             }
         }
         pass_fail(testvalue, Integer.parseInt(String.valueOf(sb)));//puts the above obtained value into a function to test if it passes the test
 
+
         sb = new StringBuilder();//Reading for the Account Number
-        for(int count = 30 ; count < 60; count++){
+        for(int count = 0 ; count < 20; count++){
             if(Character.isDigit(chars[count])){
                 sb.append(chars[count]);
             }
@@ -139,8 +142,7 @@ public class nfc_reader extends AppCompatActivity {
         File dir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);//Initializing a text file to store the account
         File Activitylog = new File(dir, "Activitylog.txt");
         readAndWrite rw = new readAndWrite(Activitylog);
-        rw.writeFile(String.valueOf(sb));//write account number to file
-
+        rw.writeFile(new String(String.valueOf(sb)));//write account number to file
 
 
 

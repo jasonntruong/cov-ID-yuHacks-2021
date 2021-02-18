@@ -29,6 +29,7 @@ import android.widget.Button;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,18 +40,15 @@ public class Activitylog extends Fragment {
 
     private Activitylog1ViewModel dashboardViewModel;
 
-    public static List<Button> allscanentry;
-    private static Button button;
-    ArrayList<String> accountnum;
+    List<Button> allscanentry;
+    public static ArrayList<String> accountnum;
 
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                new ViewModelProvider(this).get(Activitylog1ViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        dashboardViewModel = new ViewModelProvider(this).get(Activitylog1ViewModel.class);
         View root = inflater.inflate(R.layout.fragment_activity_log, container, false);
         final TextView textView = root.findViewById(R.id.text_dashboard);
         dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -59,6 +57,8 @@ public class Activitylog extends Fragment {
                 textView.setText(s);
             }
         });
+
+        Button button;
 
         File dir = getActivity().getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
         File Activitylog = new File(dir, "Activitylog.txt");
