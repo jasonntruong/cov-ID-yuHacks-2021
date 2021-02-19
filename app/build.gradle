@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.covid"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -49,5 +49,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
 
 }

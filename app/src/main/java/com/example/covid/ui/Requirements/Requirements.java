@@ -22,6 +22,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.covid.R;
 
 public class Requirements extends Fragment{
+    public static String str1, str2;
+    public static int numdays;
 
     private RequirementsViewModel requirementsViewModel;
 
@@ -59,7 +61,6 @@ public class Requirements extends Fragment{
         savebutton.setOnClickListener(new View.OnClickListener() { //method which helps us to link a listener with certain attributes. While this method runs, a callback function will run
             @Override
             public void onClick(View v) {
-                String str1, str2;
                 if (negativeswitch.isChecked()) {
                     str1 = negativeswitch.getTextOn().toString(); //The value of the negative switch attribute when it's on
                 }
@@ -72,6 +73,7 @@ public class Requirements extends Fragment{
                 else {
                     str2 = vaccinatedswitch.getTextOff().toString(); //The value of the vaccinated switch attribute when it's off
                 }
+                numdays = Integer.parseInt(String.valueOf(days.getText()));
                 Toast.makeText(getActivity(), "Negative Test- " + str1 + "\n" + "Vaccinated- " + str2 + "\nNumber of Days Since Previous Test- " +  days.getText(),Toast.LENGTH_SHORT).show(); //Outputs to given attribute
 
             }

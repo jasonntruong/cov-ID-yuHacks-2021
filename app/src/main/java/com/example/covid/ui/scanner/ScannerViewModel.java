@@ -1,14 +1,14 @@
-package com.example.covid.ui.Activitylog;
+package com.example.covid.ui.scanner;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class Activitylog1ViewModel extends ViewModel {
+public class ScannerViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public Activitylog1ViewModel() {
+    public ScannerViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue(" ");
     }
